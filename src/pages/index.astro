@@ -68,6 +68,12 @@ const releases: any[] = (await gh(`repos/${REPO}/releases?per_page=5`)) ?? [];
             ★ {meta.stargazers_count} · {meta.language ?? "Rust"}
           </span>
         </div>
+
+        <nav class="mt-6 flex flex-wrap gap-2 mono text-xs" aria-label="Tier-3 microfrontends">
+          <a href="/docs" class="tier3-link">/docs</a>
+          <a href="/qa" class="tier3-link">/qa</a>
+          <a href="/otel" class="tier3-link">/otel</a>
+        </nav>
       </header>
 
       {releases.length > 0 && (
@@ -132,6 +138,15 @@ const releases: any[] = (await gh(`repos/${REPO}/releases?per_page=5`)) ?? [];
       .readme-prose table { border-collapse: collapse; margin-bottom: 1rem; }
       .readme-prose th, .readme-prose td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; }
       .readme-prose img { display: inline-block; }
+      .tier3-link {
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.4rem;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 120ms, border-color 120ms;
+      }
+      .tier3-link:hover { color: var(--accent); border-color: var(--accent); }
     </style>
   </body>
 </html>
