@@ -60,7 +60,7 @@ async function ghHtml(p: string): Promise<string | null> {
 
 export async function getStaticPaths() {
   // Recursively walk docs/ via the GitHub Trees API.
-  async function walk(): Promise<string[]> {
+  async function walk(): Promise<Array<{ slug: string; ext: string }>> {
     const tree = await fetch(
       `https://api.github.com/repos/KooshaPari/AgilePlus/git/trees/main?recursive=1`,
       {
@@ -83,13 +83,19 @@ export async function getStaticPaths() {
           n.path.startsWith("docs/") &&
           (n.path.endsWith(".md") || n.path.endsWith(".mdx")),
       )
-      .map((n: any) => n.path.replace(/^docs\//, "").replace(/\.mdx?$/, ""));
+      .map((n: any) => {
+        const ext = n.path.endsWith(".mdx") ? ".mdx" : ".md";
+        return {
+          slug: n.path.replace(/^docs\//, "").replace(/\.mdx?$/, ""),
+          ext,
+        };
+      });
   }
   const paths = await walk();
   // Always emit a root /docs as well.
   return [
-    { params: { slug: undefined } },
-    ...paths.map((p) => ({ params: { slug: p } })),
+    { params: { slug: undefined }, props: { ext: "" } },
+    ...paths.map((p) => ({ params: { slug: p.slug }, props: { ext: p.ext } })),
   ];
 }
 
@@ -98,6 +104,7 @@ let title = slug ?? "Docs";
 let bodyHtml = "";
 let degraded = false;
 let degradeReason = "";
+const fileExt = Astro.props.ext || ".md";
 
 const listing = await ghJson(`repos/${REPO}/contents/${path}?ref=main`);
 
@@ -106,12 +113,9 @@ if (Array.isArray(listing)) {
   title = slug ?? "Docs";
   const entries = listing as GhContentEntry[];
   const items = entries
-    .filter((e) => e.type === "dir" || e.name.match(/\.mdx?$/))
+    .filter((e) => e.type === "file" && e.name.match(/\.mdx?$/))
     .map((e) => {
-      const href =
-        e.type === "dir"
-          ? `/docs/${e.path.replace(/^docs\//, "")}`
-          : `/docs/${e.path.replace(/^docs\//, "").replace(/\.mdx?$/, "")}`;
+      const href = `/docs/${e.path.replace(/^docs\//, "").replace(/\.mdx?$/, "")}`;
       return `<li><a class="doc-link" href="${href}">${e.name}</a></li>`;
     })
     .join("\n");
@@ -120,24 +124,24 @@ if (Array.isArray(listing)) {
     : `<p class="muted">Directory <code>${path}</code> is empty.</p>`;
 } else if (listing && typeof listing === "object" && "type" in listing) {
   // Single file. Render via the HTML accept header for a server-side markdown render.
-  const html = await ghHtml(`repos/${REPO}/contents/${path}.md?ref=main`);
+  const html = await ghHtml(`repos/${REPO}/contents/${path}${fileExt}?ref=main`);
   if (html) {
     bodyHtml = html;
     title = slug ?? "Docs";
   } else {
     degraded = true;
-    degradeReason = `Could not render <code>${path}.md</code>.`;
+    degradeReason = `Could not render <code>${path}${fileExt}</code>.`;
   }
 } else {
-  // Try .md fallback.
-  const html = await ghHtml(`repos/${REPO}/contents/${path}.md?ref=main`);
+  // Try with the correct extension.
+  const html = await ghHtml(`repos/${REPO}/contents/${path}${fileExt}?ref=main`);
   if (html) {
     bodyHtml = html;
   } else {
-    const raw = await ghRaw(`repos/${REPO}/contents/${path}.md?ref=main`);
+    const raw = await ghRaw(`repos/${REPO}/contents/${path}${fileExt}?ref=main`);
     if (raw) {
       // Last-ditch: raw markdown wrapped in <pre>.
-      bodyHtml = `<pre class="raw-md">${raw.replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "amp;" })[c] ?? c)}</pre>`;
+      bodyHtml = `<pre class="raw-md">${raw.replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c] ?? c)}</pre>`;
     } else {
       degraded = true;
       degradeReason = `No content found at <code>${path}</code> in <code>${REPO}</code>.`;
