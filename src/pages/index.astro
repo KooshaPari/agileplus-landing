@@ -1,0 +1,137 @@
+---
+import "../styles/globals.css";
+
+// Fetch AgilePlus repo metadata + README at build time
+const REPO = "KooshaPari/AgilePlus";
+
+async function gh(path: string, accept = "application/vnd.github+json") {
+  const res = await fetch(`https://api.github.com/${path}`, {
+    headers: {
+      Accept: accept,
+      "User-Agent": "agileplus-landing-build",
+      ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
+    },
+  });
+  if (!res.ok) return null;
+  return accept.includes("html") ? res.text() : res.json();
+}
+
+const meta: any = (await gh(`repos/${REPO}`)) ?? {
+  description: "Spec-driven development engine with requirements traceability, ADR management, and project planning",
+  stargazers_count: 0,
+  pushed_at: new Date().toISOString(),
+  language: "Rust",
+  homepage: "https://kooshapari.github.io/AgilePlus/",
+};
+
+const readmeHtml: string =
+  (await gh(`repos/${REPO}/readme`, "application/vnd.github.html+json")) ??
+  "<p>README unavailable at build time.</p>";
+
+const releases: any[] = (await gh(`repos/${REPO}/releases?per_page=5`)) ?? [];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AgilePlus — Spec-driven development engine</title>
+    <meta name="description" content={meta.description} />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>A</text></svg>" />
+  </head>
+  <body class="min-h-screen">
+    <main class="max-w-4xl mx-auto px-6 py-12">
+      <header class="mb-12">
+        <div class="mono text-xs text-[var(--muted)] mb-2">
+          <a href="https://projects.kooshapari.com" class="hover:text-[var(--accent)]">phenotype</a>
+          <span class="mx-1">/</span>
+          <span>agileplus</span>
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-3">AgilePlus</h1>
+        <p class="text-lg text-[var(--muted)] max-w-2xl">{meta.description}</p>
+
+        <div class="mt-6 flex flex-wrap gap-3 mono text-sm">
+          <a href={`https://github.com/${REPO}`} target="_blank" rel="noopener"
+             class="px-4 py-2 rounded-lg border bg-[var(--card)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition"
+             style="border-color: var(--border);">
+            github →
+          </a>
+          {meta.homepage && (
+            <a href={meta.homepage} target="_blank" rel="noopener"
+               class="px-4 py-2 rounded-lg border bg-[var(--card)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition"
+               style="border-color: var(--border);">
+              docs →
+            </a>
+          )}
+          <span class="px-4 py-2 rounded-lg mono text-xs text-[var(--muted)] flex items-center gap-2"
+                style="border: 1px solid var(--border);">
+            ★ {meta.stargazers_count} · {meta.language ?? "Rust"}
+          </span>
+        </div>
+      </header>
+
+      {releases.length > 0 && (
+        <section class="mb-10">
+          <h2 class="mono text-sm uppercase tracking-wider text-[var(--muted)] mb-3">Latest releases</h2>
+          <ul class="space-y-2">
+            {releases.slice(0, 3).map((r: any) => (
+              <li class="flex items-baseline gap-3 mono text-sm">
+                <a href={r.html_url} target="_blank" rel="noopener" class="text-[var(--accent)] hover:underline">{r.tag_name}</a>
+                <span class="text-[var(--muted)] truncate">{r.name ?? ""}</span>
+                <span class="ml-auto text-xs text-[var(--muted)] shrink-0">{new Date(r.published_at).toLocaleDateString()}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <section class="readme-prose" set:html={readmeHtml}></section>
+
+      <footer class="mt-16 pt-6 border-t text-xs text-[var(--muted)] mono" style="border-color: var(--border);">
+        agileplus.kooshapari.com · auto-built from <a href={`https://github.com/${REPO}`} class="underline hover:text-[var(--accent)]">{REPO}</a> · part of <a href="https://projects.kooshapari.com" class="underline hover:text-[var(--accent)]">projects.kooshapari.com</a>
+      </footer>
+    </main>
+
+    <style is:global>
+      .readme-prose { line-height: 1.7; }
+      .readme-prose h1, .readme-prose h2, .readme-prose h3 {
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.2;
+      }
+      .readme-prose h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+      .readme-prose h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+      .readme-prose h3 { font-size: 1.2rem; }
+      .readme-prose p, .readme-prose ul, .readme-prose ol { margin-bottom: 1rem; }
+      .readme-prose ul, .readme-prose ol { padding-left: 1.5rem; }
+      .readme-prose li { margin-bottom: 0.25rem; }
+      .readme-prose a { color: var(--accent); text-decoration: underline; }
+      .readme-prose code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        background: var(--card);
+        padding: 0.1rem 0.4rem;
+        border-radius: 0.25rem;
+        font-size: 0.9em;
+      }
+      .readme-prose pre {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin-bottom: 1rem;
+      }
+      .readme-prose pre code { background: transparent; padding: 0; }
+      .readme-prose blockquote {
+        border-left: 3px solid var(--accent);
+        padding-left: 1rem;
+        color: var(--muted);
+        margin: 1rem 0;
+      }
+      .readme-prose table { border-collapse: collapse; margin-bottom: 1rem; }
+      .readme-prose th, .readme-prose td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; }
+      .readme-prose img { display: inline-block; }
+    </style>
+  </body>
+</html>

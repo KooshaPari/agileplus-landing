@@ -1,0 +1,20 @@
+{
+  "name": "agileplus-landing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AgilePlus landing page (agileplus.kooshapari.com)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "data:refresh": "bash scripts/fetch-readme.sh"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "astro": "^5.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.6.0"
+  }
+}
