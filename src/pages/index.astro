@@ -1,34 +1,51 @@
 ---
 import "../styles/globals.css";
+import readmeSnapshot from "../data/readme.html?raw";
+import repoSnapshot from "../data/repo.json";
+import releasesSnapshot from "../data/releases.json";
 
-// Fetch AgilePlus repo metadata + README at build time
+// Fetch AgilePlus repo metadata + README at build time.
+// Strategy: try live GitHub API (uses GITHUB_TOKEN if set in Vercel env to
+// avoid the 60/hr unauthenticated rate limit), but ALWAYS fall back to a
+// committed snapshot so the page never ships with "README unavailable".
+// Refresh snapshots locally with `bun run data:refresh`.
 const REPO = "KooshaPari/AgilePlus";
 
-async function gh(path: string, accept = "application/vnd.github+json") {
-  const res = await fetch(`https://api.github.com/${path}`, {
-    headers: {
-      Accept: accept,
-      "User-Agent": "agileplus-landing-build",
-      ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
-    },
-  });
-  if (!res.ok) return null;
-  return accept.includes("html") ? res.text() : res.json();
+async function gh<T = unknown>(
+  path: string,
+  accept = "application/vnd.github+json",
+): Promise<T | null> {
+  try {
+    const res = await fetch(`https://api.github.com/${path}`, {
+      headers: {
+        Accept: accept,
+        "User-Agent": "agileplus-landing-build",
+        ...(process.env.GITHUB_TOKEN
+          ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+          : {}),
+      },
+    });
+    if (!res.ok) {
+      console.warn(`[index] GitHub ${path} -> ${res.status}; falling back to snapshot`);
+      return null;
+    }
+    return (accept.includes("html") ? await res.text() : await res.json()) as T;
+  } catch (err) {
+    console.warn(`[index] GitHub ${path} fetch failed: ${(err as Error).message}; falling back to snapshot`);
+    return null;
+  }
 }
 
-const meta: any = (await gh(`repos/${REPO}`)) ?? {
-  description: "Spec-driven development engine with requirements traceability, ADR management, and project planning",
-  stargazers_count: 0,
-  pushed_at: new Date().toISOString(),
-  language: "Rust",
-  homepage: "https://kooshapari.github.io/AgilePlus/",
-};
+const meta: any = (await gh(`repos/${REPO}`)) ?? (repoSnapshot as any);
 
-const readmeHtml: string =
-  (await gh(`repos/${REPO}/readme`, "application/vnd.github.html+json")) ??
-  "<p>README unavailable at build time.</p>";
+const liveReadme = await gh<string>(
+  `repos/${REPO}/readme`,
+  "application/vnd.github.html+json",
+);
+const readmeHtml: string = liveReadme ?? readmeSnapshot;
 
-const releases: any[] = (await gh(`repos/${REPO}/releases?per_page=5`)) ?? [];
+const liveReleases = await gh<any[]>(`repos/${REPO}/releases?per_page=5`);
+const releases: any[] = liveReleases ?? (releasesSnapshot as any[]);
 ---
 
 <html lang="en">
