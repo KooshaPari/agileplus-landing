@@ -1,28 +1,233 @@
 # agileplus-landing
 
-Landing page at `agileplus.kooshapari.com` for [KooshaPari/AgilePlus](https://github.com/KooshaPari/AgilePlus).
+Production landing page at `agileplus.kooshapari.com` for [KooshaPari/AgilePlus](https://github.com/KooshaPari/AgilePlus), a Rust-based project management and workflow orchestration platform. Part of the Phenotype org-pages architecture (Tier 2; Tier 1 is `projects.kooshapari.com`).
 
-Pulls README at build time from GitHub. Tier 2 of the org-pages tree (Tier 1 is `projects.kooshapari.com`).
+## Purpose
 
-## Stack
+Provide a cohesive entry point to AgilePlus documentation, dashboards, and QA reports. The landing page dynamically pulls project metadata (README, latest release, stats) from the GitHub API at build time, avoiding stale content. Implements the Phenotype org-pages pattern with path-based microfrontends under a single domain.
 
-- Astro 5 + Tailwind 4
-- Deployed on Vercel (custom domain via Cloudflare CNAME)
-- Build-time fetch of repo metadata + README HTML from GitHub API
+## Architecture
 
-## Local dev
+- **Frontend:** Astro 5 (static HTML at build time, edge rendering)
+- **Styling:** Tailwind CSS 4 with impeccable design baseline
+- **Deployment:** Vercel (serverless functions for API routes)
+- **Domain:** `agileplus.kooshapari.com` via Cloudflare CNAME
+- **Data sources:** GitHub API (README, releases), OpenTelemetry backend (metrics), local database (QA reports)
 
-```bash
-bun install
-bun run dev
+## Stack Details
+
+```toml
+# Runtime
+astro = "5.0"
+tailwindcss = "4.0"
+
+# Build-time
+octokit = "^21.0"  # GitHub API client
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.0", features = ["full"] }
+
+# Optional: async operations
+@vercel/og = "^0.6"  # Open Graph image generation
 ```
 
-## Path microfrontends (planned)
+## Local Development
 
-Per Phenotype org-pages standing policy, this domain hosts:
+### Prerequisites
 
-- `/` — landing (this repo)
-- `/docs` — VitePress docs (mounted from AgilePlus/docs)
-- `/otel` — OpenTelemetry dashboards
-- `/qa` — QA reports
-- `/preview/<pr#>` — PR preview deployments
+- `bun` 1.0+ (package manager & runtime)
+- Node.js 20+ (fallback)
+- `git` (for GitHub metadata fetching during build)
+
+### Setup & Run
+
+```bash
+# Clone repository
+git clone https://github.com/KooshaPari/agileplus-landing.git
+cd agileplus-landing
+
+# Install dependencies
+bun install
+
+# Set environment variables
+export GITHUB_TOKEN=ghp_xxxx  # Optional: higher API rate limits
+export VERCEL_ENV=development
+
+# Start dev server (with HMR + auto-reload)
+bun run dev
+# Server: http://localhost:3000
+```
+
+### Build for Production
+
+```bash
+# Build static site
+bun run build
+
+# Preview production build locally
+bun run preview
+
+# Deploy to Vercel
+bun run deploy
+```
+
+## Path Microfrontends
+
+Per Phenotype org-pages standing policy, `agileplus.kooshapari.com` hosts multiple surfaces as path-based microfrontends:
+
+| Path | Component | Status | Purpose |
+|------|-----------|--------|---------|
+| `/` | Landing page | ✅ Active | AgilePlus overview, GitHub metadata, CTA |
+| `/docs` | VitePress | 📋 Planned | Mounted docs from AgilePlus/docs @ `/docs` |
+| `/otel` | OTEL Dashboard | 📋 Planned | Observability metrics (latency, throughput, errors) |
+| `/qa` | QA Reports | 📋 Planned | Test coverage, Semgrep results, security scans |
+| `/preview/<pr#>` | PR Preview | 📋 Planned | Deploy PR previews to `/preview/123` on merge to staging |
+
+### Implementing Microfrontends
+
+Each microfrontend is isolated and mounted independently:
+
+```astro
+<!-- src/pages/docs/[...slug].astro — VitePress passthrough -->
+---
+import { getVitePressPage } from '../integrations/vitepresse';
+
+const doc = await getVitePressPage(Astro.params.slug);
+---
+<div set:html={doc.html} />
+```
+
+## Environment Variables
+
+```bash
+# GitHub API (optional, but recommended)
+GITHUB_TOKEN=ghp_xxxx           # Increases rate limit to 5000 req/hr
+
+# Vercel deployment
+VERCEL_ENV=production|staging    # Set by Vercel automatically
+VERCEL_URL=agileplus.kooshapari.com
+
+# OTEL backend (when microfrontend launches)
+OTEL_ENDPOINT=https://otel.internal/api/v1
+OTEL_AUTH_TOKEN=xxx
+```
+
+## Building & Customization
+
+### Modify Landing Page Content
+
+Edit `src/components/Hero.astro`, `src/components/Features.astro`:
+
+```astro
+---
+// src/components/Hero.astro
+const githubData = await fetchGitHubRepo('KooshaPari/AgilePlus');
+---
+
+<section class="hero">
+  <h1>{githubData.description}</h1>
+  <p>Latest release: {githubData.latestTag}</p>
+</section>
+```
+
+### Add Custom Styling
+
+Extend Tailwind in `tailwind.config.ts`:
+
+```ts
+export default {
+  theme: {
+    extend: {
+      colors: {
+        'phenotype-purple': '#7c3aed',
+      },
+    },
+  },
+}
+```
+
+### Fetch Live Data at Build Time
+
+```astro
+---
+// src/pages/index.astro
+import { getGitHubREADME, getLatestRelease } from '../lib/github';
+
+const readme = await getGitHubREADME('KooshaPari/AgilePlus');
+const release = await getLatestRelease('KooshaPari/AgilePlus');
+---
+
+<article set:html={readme.html} />
+<p>Latest: {release.tag_name}</p>
+```
+
+## Testing & Verification
+
+```bash
+# Lint and format
+bun run lint
+bun run format
+
+# Type check (Astro)
+astro check
+
+# Build and verify no errors
+bun run build
+
+# Test in browser
+bun run preview
+# Visit http://localhost:3000 manually
+```
+
+## Deployment
+
+### Automated (Push to main)
+
+```yaml
+# .github/workflows/deploy.yml triggers on:
+# - Push to main
+# - Manual trigger via workflow_dispatch
+
+# 1. Install dependencies
+# 2. Build static site
+# 3. Deploy to Vercel (automatic with linked repo)
+```
+
+### Manual Deployment
+
+```bash
+# Deploy to production
+vercel --prod
+
+# Deploy to staging
+vercel --target staging
+```
+
+### Custom Domain (Cloudflare)
+
+```bash
+# In Cloudflare DNS:
+CNAME agileplus → cname.vercel-dns.com
+
+# Verify
+nslookup agileplus.kooshapari.com
+# Should resolve to Vercel IP
+```
+
+## Governance
+
+- **Codebase:** TypeScript/Astro (no server-side logic; all static/edge)
+- **Styling:** Tailwind 4 + impeccable CSS baseline
+- **Updates:** Dependabot auto-updates dev dependencies; manual review for breaking changes
+- **Monitoring:** Error tracking via Sentry (optional)
+- **Deployment:** Vercel auto-deploys on push; no manual CI needed
+
+## Related
+
+- [AgilePlus](https://github.com/KooshaPari/AgilePlus) — Main project repository
+- [projects.kooshapari.com](https://github.com/KooshaPari/portfolio) — Tier 1 landing (all projects)
+- [phenotype-design](../phenotype-design/) — Design system & components
+- [Org Pages Architecture](https://github.com/KooshaPari/phenotype-infrakit/docs/governance/org-pages-architecture.md)
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
