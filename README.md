@@ -49,3 +49,13 @@ Per Phenotype org-pages standing policy, this domain hosts:
 - `/otel` — OpenTelemetry dashboards
 - `/qa` — QA reports
 - `/preview/<pr#>` — PR preview deployments
+
+## Observability `/otel`
+
+The `/otel` route embeds the externally hosted PhenoObservability UI. Set
+`PHENO_OTLP_UI_URL` in Vercel for Production and Preview deployments, then redeploy.
+`PHENO_OBSERVABILITY_UI_URL` is accepted as a secondary alias, but the canonical landing
+variable is `PHENO_OTLP_UI_URL`.
+
+See `docs/tasks/otel-observability-backend.md` for the long-term backend task,
+deployment checklist, and acceptance criteria.
