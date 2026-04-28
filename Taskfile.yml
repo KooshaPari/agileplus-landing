@@ -15,9 +15,10 @@ tasks:
       - bun run build
 
   test:
-    desc: Run build validation for the current Astro app
+    desc: Run the Astro checks and production build
     cmds:
-      - bun run build
+      - task: lint
+      - task: build
 
   lint:
     desc: Run Astro type and template checks
