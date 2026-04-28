@@ -27,4 +27,4 @@ tasks:
   clean:
     desc: Remove generated build artifacts
     cmds:
-      - rm -rf dist .astro
+      - 'bun -e "import { rmSync } from ''node:fs''; for (const path of [''dist'', ''.astro'']) rmSync(path, { recursive: true, force: true })"'
