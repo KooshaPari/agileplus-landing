@@ -1,0 +1,30 @@
+version: "3"
+
+# Detected from package.json, astro.config.mjs, and vercel.json:
+# Astro + TypeScript frontend with Bun-based commands.
+
+tasks:
+  default:
+    desc: Build the site
+    cmds:
+      - bun run build
+
+  build:
+    desc: Build the Astro site
+    cmds:
+      - bun run build
+
+  test:
+    desc: Run build validation for the current Astro app
+    cmds:
+      - bun run build
+
+  lint:
+    desc: Run Astro type and template checks
+    cmds:
+      - bunx astro check
+
+  clean:
+    desc: Remove generated build artifacts
+    cmds:
+      - rm -rf dist .astro
