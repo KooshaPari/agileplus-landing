@@ -23,8 +23,55 @@ const configuredEnvKey = configuredEnv?.[0] ?? "PHENO_OTLP_UI_URL";
 const rawOtelUrl = configuredEnv?.[1]?.trim() ?? null;
 const otelUrl = rawOtelUrl && /^https?:\/\//.test(rawOtelUrl) ? rawOtelUrl : null;
 const invalidOtelUrl = rawOtelUrl && !otelUrl ? rawOtelUrl : null;
+const otelPolicyCheck = otelUrl ? await checkFramePolicy(otelUrl) : null;
+const iframeBlocked = Boolean(otelPolicyCheck && !otelPolicyCheck.allowed);
+const iframeBlockedReason = otelPolicyCheck?.reason ?? null;
 const otelRunbookPath = "docs/tasks/otel-observability-backend.md";
 const otelRunbookUrl = `https://github.com/KooshaPari/agileplus-landing/blob/main/${otelRunbookPath}`;
+
+type FramePolicyCheck = {
+  allowed: boolean;
+  reason: string | null;
+  policy: string | null;
+};
+
+async function checkFramePolicy(url: string): Promise<FramePolicyCheck | null> {
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      redirect: "follow",
+    });
+
+    const csp = response.headers.get("content-security-policy");
+    if (csp && /frame-ancestors\s+'none'/i.test(csp)) {
+      return {
+        allowed: false,
+        reason: "the configured UI explicitly forbids framing via Content-Security-Policy",
+        policy: csp,
+      };
+    }
+
+    const xFrameOptions = response.headers.get("x-frame-options");
+    if (xFrameOptions && /deny|sameorigin/i.test(xFrameOptions)) {
+      return {
+        allowed: false,
+        reason: "the configured UI blocks framing via X-Frame-Options",
+        policy: xFrameOptions,
+      };
+    }
+
+    return {
+      allowed: true,
+      reason: null,
+      policy: csp ?? xFrameOptions,
+    };
+  } catch (error) {
+    console.warn(
+      `[otel] frame policy probe failed for ${url}: ${(error as Error).message}; falling back to iframe render`,
+    );
+    return null;
+  }
+}
 ---
 
 <html lang="en">
@@ -58,7 +105,7 @@ const otelRunbookUrl = `https://github.com/KooshaPari/agileplus-landing/blob/mai
         )}
       </header>
 
-      {otelUrl ? (
+      {otelUrl && !iframeBlocked ? (
         <div class="otel-frame-wrap">
           <iframe
             src={otelUrl}
@@ -72,12 +119,17 @@ const otelRunbookUrl = `https://github.com/KooshaPari/agileplus-landing/blob/mai
       ) : (
         <div class="otel-degraded">
           <h2 class="mono text-sm uppercase tracking-wider mb-3">
-            {invalidOtelUrl ? "Backend URL invalid" : "Backend not configured"}
+            {invalidOtelUrl ? "Backend URL invalid" : iframeBlocked ? "Backend not embeddable" : "Backend not configured"}
           </h2>
           {invalidOtelUrl ? (
             <p class="mb-3">
               <code>{configuredEnvKey}</code> is set, but it is not an absolute HTTP(S) URL:
               <code>{invalidOtelUrl}</code>.
+            </p>
+          ) : iframeBlocked ? (
+            <p class="mb-3">
+              The configured observability UI cannot be embedded in an iframe because
+              {iframeBlockedReason ? ` ${iframeBlockedReason}.` : " its response blocks framing."}
             </p>
           ) : (
             <p class="mb-3">
@@ -93,6 +145,11 @@ const otelRunbookUrl = `https://github.com/KooshaPari/agileplus-landing/blob/mai
               <li>
                 In the Vercel dashboard for <code>agileplus-landing</code>, set
                 <code>PHENO_OTLP_UI_URL</code> to that URL.
+              </li>
+              <li>
+                Use a UI that explicitly permits framing. Arize public app pages and other
+                hosts that send <code>frame-ancestors 'none'</code> or
+                <code>X-Frame-Options</code> deny/sameorigin will not work here.
               </li>
               <li>Redeploy. The iframe will pick up the URL on the next build.</li>
             </ol>

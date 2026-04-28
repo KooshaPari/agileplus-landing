@@ -57,5 +57,9 @@ The `/otel` route embeds the externally hosted PhenoObservability UI. Set
 `PHENO_OBSERVABILITY_UI_URL` is accepted as a secondary alias, but the canonical landing
 variable is `PHENO_OTLP_UI_URL`.
 
+The embedded UI must allow iframe embedding. Public app pages that send
+`frame-ancestors 'none'` or `X-Frame-Options: DENY/SAMEORIGIN` will be blocked by the
+browser and should not be used as the `PHENO_OTLP_UI_URL` target.
+
 See `docs/tasks/otel-observability-backend.md` for the long-term backend task,
 deployment checklist, and acceptance criteria.
