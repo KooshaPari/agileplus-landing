@@ -19,29 +19,29 @@ const otelUrl = import.meta.env.PHENO_OTLP_UI_URL ?? process.env.PHENO_OTLP_UI_U
     <meta name="description" content="Embedded observability backend (traces, metrics, logs)." />
   </head>
   <body class="min-h-screen">
-    <main class="max-w-7xl mx-auto px-6 py-8">
-      <nav class="mono text-xs text-[var(--muted)] mb-4">
-        <a href="/" class="hover:text-[var(--accent)]">agileplus</a>
-        <span class="mx-1">/</span>
-        <span>otel</span>
-      </nav>
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 pt-8 sm:pt-10 mono text-xs text-[var(--muted)]" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-[var(--accent)]">agileplus</a>
+      <span class="mx-1">/</span>
+      <span aria-current="page">otel</span>
+    </nav>
 
-      <header class="mb-6 flex flex-wrap items-baseline justify-between gap-3">
-        <div>
-          <h1 class="text-3xl font-bold">Observability</h1>
-          <p class="text-[var(--muted)] text-sm">
-            Embedded OTel UI (traces, metrics, logs) from the Phenotype observability backend.
-          </p>
-        </div>
-        {otelUrl && (
-          <a href={otelUrl} target="_blank" rel="noopener"
-             class="mono text-xs px-3 py-1.5 rounded border hover:text-[var(--accent)] hover:border-[var(--accent)] transition"
-             style="border-color: var(--border);">
-            open in new tab →
-          </a>
-        )}
-      </header>
+    <header class="max-w-7xl mx-auto px-4 sm:px-6 mt-4 mb-6 flex flex-wrap items-baseline justify-between gap-3">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-bold">Observability</h1>
+        <p class="text-[var(--muted)] text-sm">
+          Embedded OTel UI (traces, metrics, logs) from the Phenotype observability backend.
+        </p>
+      </div>
+      {otelUrl && (
+        <a href={otelUrl} target="_blank" rel="noopener"
+           class="mono text-xs px-3 py-1.5 rounded border hover:text-[var(--accent)] hover:border-[var(--accent)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+           style="border-color: var(--border);">
+          open in new tab →
+        </a>
+      )}
+    </header>
 
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-10" id="main-content">
       {otelUrl ? (
         <div class="otel-frame-wrap">
           <iframe
@@ -54,7 +54,7 @@ const otelUrl = import.meta.env.PHENO_OTLP_UI_URL ?? process.env.PHENO_OTLP_UI_U
           ></iframe>
         </div>
       ) : (
-        <div class="otel-degraded">
+        <div class="otel-degraded" role="status" aria-label="Backend not configured">
           <h2 class="mono text-sm uppercase tracking-wider mb-3">Backend not configured</h2>
           <p class="mb-3">
             The <code>PHENO_OTLP_UI_URL</code> environment variable is not set
@@ -72,11 +72,11 @@ const otelUrl = import.meta.env.PHENO_OTLP_UI_URL ?? process.env.PHENO_OTLP_UI_U
           </details>
         </div>
       )}
-
-      <footer class="mt-10 pt-6 border-t text-xs text-[var(--muted)] mono" style="border-color: var(--border);">
-        Spec: <a href="https://github.com/KooshaPari/phenotype-infra/blob/main/docs/governance/path-microfrontends-tier3.md" class="underline hover:text-[var(--accent)]">path-microfrontends-tier3.md</a>
-      </footer>
     </main>
+
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 mt-10 pt-6 border-t text-xs text-[var(--muted)] mono pb-8" style="border-color: var(--border);">
+      Spec: <a href="https://github.com/KooshaPari/phenotype-infra/blob/main/docs/governance/path-microfrontends-tier3.md" class="underline hover:text-[var(--accent)]">path-microfrontends-tier3.md</a>
+    </footer>
 
     <style is:global>
       .otel-frame-wrap {
