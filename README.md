@@ -4,7 +4,7 @@
 
 Landing page at `agileplus.kooshapari.com` for [KooshaPari/AgilePlus](https://github.com/KooshaPari/AgilePlus).
 
-Pulls README at build time from GitHub. Tier 2 of the org-pages tree (Tier 1 is `projects.kooshapari.com`).
+Pulls README at build time from GitHub. Tier 2 of the org-pages tree.
 
 ## Stack
 
