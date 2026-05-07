@@ -18,4 +18,3 @@
   report missing dependencies as an environment blocker rather than masking it.
 - Uncertainty: Canonical integration is deferred unless the unrelated workflow
   edit is resolved or explicitly scoped into a later change.
-

@@ -13,4 +13,3 @@ edit.
   `docs/agileplus-landing-sladge-current`.
 - Left canonical `agileplus-landing` untouched because it has an unrelated
   `.github/workflows/ci.yml` modification.
-

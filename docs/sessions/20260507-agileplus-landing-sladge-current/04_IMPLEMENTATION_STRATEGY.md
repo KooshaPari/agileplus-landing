@@ -10,4 +10,3 @@ edit the canonical checkout or reuse stale worktree evidence.
 - Run `git diff --check`.
 - Verify badge presence with `rg`.
 - Run repo-native tests/build where dependencies are available.
-

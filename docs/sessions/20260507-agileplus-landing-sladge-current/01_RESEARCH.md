@@ -19,4 +19,3 @@ target rather than a generic infrastructure false positive.
 Sibling Sladge rollout commits place the badge immediately below the README
 title and record the work in session docs plus the projects-landing governance
 ledger.
-

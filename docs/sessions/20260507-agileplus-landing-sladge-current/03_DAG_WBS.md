@@ -18,4 +18,3 @@
 | APL-SLADGE-004 | Run downstream validation | Pending |
 | APL-SLADGE-005 | Commit downstream proof | Pending |
 | APL-SLADGE-006 | Update projects-landing ledgers | Pending |
-

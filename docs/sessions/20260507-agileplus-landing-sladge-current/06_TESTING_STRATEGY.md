@@ -12,4 +12,3 @@
 This is a docs-only governance change, so source-level tests are used as
 regression proof only where the local environment can run them without network
 or dependency bootstrap.
-
