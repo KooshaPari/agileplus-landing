@@ -6,13 +6,14 @@ Pulls README at build time from GitHub. Tier 2 of the org-pages tree (Tier 1 is 
 
 ## Stack
 
-- Astro 5 + Tailwind 4
+- Astro 6 + Tailwind 4
 - Deployed on Vercel (custom domain via Cloudflare CNAME)
 - Build-time fetch of repo metadata + README HTML from GitHub API
 
 ## Local dev
 
 ```bash
+cd apps/landing
 bun install
 bun run dev
 ```
@@ -45,7 +46,7 @@ GITHUB_TOKEN=<your-token> bun run data:refresh
 Per Phenotype org-pages standing policy, this domain hosts:
 
 - `/` — landing (this repo)
-- `/docs` — VitePress docs (mounted from AgilePlus/docs)
+- `/docs` — VitePress docs (mounted from `docs/`)
 - `/otel` — OpenTelemetry dashboards
 - `/qa` — QA reports
 - `/preview/<pr#>` — PR preview deployments

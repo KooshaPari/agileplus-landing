@@ -18,7 +18,7 @@ import "../../styles/globals.css";
 const REPO_OWNER = "KooshaPari";
 const REPO_NAME = "AgilePlus";
 const REPO = `${REPO_OWNER}/${REPO_NAME}`;
-const VERCEL_PROJECT_SLUG = "agileplus"; // Vercel project name for AgilePlus app
+const VERCEL_PROJECT_SLUG = "agileplus-landing"; // Vercel project name for AgilePlus app
 const VERCEL_TEAM_SLUG = "kooshaparis-projects"; // adjust if different team scope
 
 interface PrInfo {
@@ -35,7 +35,7 @@ export async function getStaticPaths() {
   // NOTE: helpers are inlined here because Astro hoists getStaticPaths and
   // does not give it access to module-scoped declarations.
   const REPO_INNER = "KooshaPari/AgilePlus";
-  const VERCEL_PROJECT = "agileplus";
+  const VERCEL_PROJECT = "agileplus-landing";
   const VERCEL_TEAM = "kooshaparis-projects";
 
   const ghHeaders = (accept = "application/vnd.github+json") => ({
@@ -47,11 +47,15 @@ export async function getStaticPaths() {
   });
 
   const ghJson = async (path: string): Promise<any> => {
-    const res = await fetch(`https://api.github.com/${path}`, {
-      headers: ghHeaders(),
-    });
-    if (!res.ok) return null;
-    return res.json();
+    try {
+      const res = await fetch(`https://api.github.com/${path}`, {
+        headers: ghHeaders(),
+      });
+      if (!res.ok) return null;
+      return res.json();
+    } catch {
+      return null;
+    }
   };
 
   const sanitizeBranch = (b: string) =>
@@ -72,7 +76,9 @@ export async function getStaticPaths() {
         const summary: string = run?.output?.summary ?? "";
         const urlMatch = summary.match(/https:\/\/[a-z0-9-]+\.vercel\.app/i);
         if (urlMatch) return { url: urlMatch[0], source: "vercel-check-run" };
-        if (run?.details_url) return { url: run.details_url, source: "vercel-check-run" };
+        if (run?.details_url && /^https:\/\/[a-z0-9-]+\.vercel\.app/i.test(run.details_url)) {
+          return { url: run.details_url, source: "vercel-check-run" };
+        }
       }
     }
     const deployments = await ghJson(`repos/${REPO_INNER}/deployments?sha=${sha}&per_page=20`);
@@ -101,7 +107,7 @@ export async function getStaticPaths() {
     // will fall through to the [prNumber] dynamic 404 path.
     return [
       {
-        params: { prNumber: "none" },
+        params: { prNumber: "0" },
         props: { pr: null, reason: "No open PRs at build time." } as {
           pr: PrInfo | null;
           reason: string | null;

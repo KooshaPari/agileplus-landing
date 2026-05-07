@@ -17,73 +17,89 @@ interface GhContentEntry {
 }
 
 async function ghJson(p: string): Promise<any> {
-  const res = await fetch(`https://api.github.com/${p}`, {
-    headers: {
-      Accept: "application/vnd.github+json",
-      "User-Agent": "agileplus-landing-build",
-      ...(process.env.GITHUB_TOKEN
-        ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
-        : {}),
-    },
-  });
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    const res = await fetch(`https://api.github.com/${p}`, {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "agileplus-landing-build",
+        ...(process.env.GITHUB_TOKEN
+          ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+          : {}),
+      },
+    });
+    if (!res.ok) return null;
+    return res.json();
+  } catch {
+    return null;
+  }
 }
 
 async function ghRaw(p: string): Promise<string | null> {
-  const res = await fetch(`https://api.github.com/${p}`, {
-    headers: {
-      Accept: "application/vnd.github.raw",
-      "User-Agent": "agileplus-landing-build",
-      ...(process.env.GITHUB_TOKEN
-        ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
-        : {}),
-    },
-  });
-  if (!res.ok) return null;
-  return res.text();
+  try {
+    const res = await fetch(`https://api.github.com/${p}`, {
+      headers: {
+        Accept: "application/vnd.github.raw",
+        "User-Agent": "agileplus-landing-build",
+        ...(process.env.GITHUB_TOKEN
+          ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+          : {}),
+      },
+    });
+    if (!res.ok) return null;
+    return res.text();
+  } catch {
+    return null;
+  }
 }
 
 async function ghHtml(p: string): Promise<string | null> {
-  const res = await fetch(`https://api.github.com/${p}`, {
-    headers: {
-      Accept: "application/vnd.github.html+json",
-      "User-Agent": "agileplus-landing-build",
-      ...(process.env.GITHUB_TOKEN
-        ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
-        : {}),
-    },
-  });
-  if (!res.ok) return null;
-  return res.text();
+  try {
+    const res = await fetch(`https://api.github.com/${p}`, {
+      headers: {
+        Accept: "application/vnd.github.html+json",
+        "User-Agent": "agileplus-landing-build",
+        ...(process.env.GITHUB_TOKEN
+          ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+          : {}),
+      },
+    });
+    if (!res.ok) return null;
+    return res.text();
+  } catch {
+    return null;
+  }
 }
 
 export async function getStaticPaths() {
   // Recursively walk docs/ via the GitHub Trees API.
   async function walk(): Promise<string[]> {
-    const tree = await fetch(
-      `https://api.github.com/repos/KooshaPari/AgilePlus/git/trees/main?recursive=1`,
-      {
-        headers: {
-          Accept: "application/vnd.github+json",
-          "User-Agent": "agileplus-landing-build",
-          ...(process.env.GITHUB_TOKEN
-            ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
-            : {}),
+    try {
+      const tree = await fetch(
+        `https://api.github.com/repos/KooshaPari/AgilePlus/git/trees/main?recursive=1`,
+        {
+          headers: {
+            Accept: "application/vnd.github+json",
+            "User-Agent": "agileplus-landing-build",
+            ...(process.env.GITHUB_TOKEN
+              ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+              : {}),
+          },
         },
-      },
-    );
-    if (!tree.ok) return [];
-    const data: any = await tree.json();
-    if (!data.tree) return [];
-    return data.tree
-      .filter(
-        (n: any) =>
-          n.type === "blob" &&
-          n.path.startsWith("docs/") &&
-          (n.path.endsWith(".md") || n.path.endsWith(".mdx")),
-      )
-      .map((n: any) => n.path.replace(/^docs\//, "").replace(/\.mdx?$/, ""));
+      );
+      if (!tree.ok) return [];
+      const data: any = await tree.json();
+      if (!data.tree) return [];
+      return data.tree
+        .filter(
+          (n: any) =>
+            n.type === "blob" &&
+            n.path.startsWith("docs/") &&
+            (n.path.endsWith(".md") || n.path.endsWith(".mdx")),
+        )
+        .map((n: any) => n.path.replace(/^docs\//, "").replace(/\.mdx?$/, ""));
+    } catch {
+      return [];
+    }
   }
   const paths = await walk();
   // Always emit a root /docs as well.
@@ -137,7 +153,7 @@ if (Array.isArray(listing)) {
     const raw = await ghRaw(`repos/${REPO}/contents/${path}.md?ref=main`);
     if (raw) {
       // Last-ditch: raw markdown wrapped in <pre>.
-      bodyHtml = `<pre class="raw-md">${raw.replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "amp;" })[c] ?? c)}</pre>`;
+      bodyHtml = `<pre class="raw-md">${raw.replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c] ?? c)}</pre>`;
     } else {
       degraded = true;
       degradeReason = `No content found at <code>${path}</code> in <code>${REPO}</code>.`;
