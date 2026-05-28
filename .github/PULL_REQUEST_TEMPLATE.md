@@ -22,6 +22,7 @@
 - [ ] Changes are documented (if applicable)
 - [ ] Tests added/updated (if applicable)
 - [ ] No new warnings or errors
+- [ ] Reference or create an AgilePlus spec (required for new implementation work)
 
 ## Related Issues
 

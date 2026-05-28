@@ -25,8 +25,8 @@ The landing page (`/`) and QA dashboard (`/qa`) fetch from `api.github.com` at
 build time. To avoid the 60 req/hr unauthenticated rate limit (which produces
 `README unavailable at build time` and `GitHub API error: 429`), set
 `GITHUB_TOKEN` in the Vercel project's environment variables (Settings →
-Environment Variables → Production + Preview). Any token with `public_repo`
-read scope works.
+Environment Variables → Production + Preview). Any token with read access to
+this repository works.
 
 If the token is missing or the API still fails, the build falls back to the
 committed snapshots in `src/data/`:
