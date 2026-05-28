@@ -1,143 +1,636 @@
-<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">repos — CodeProjects/Phenotype organizational shelf</h1><a id="user-content-repos--codeprojectsphenotype-organizational-shelf" class="anchor" aria-label="Permalink: repos — CodeProjects/Phenotype organizational shelf" href="#repos--codeprojectsphenotype-organizational-shelf"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<p dir="auto">This is the <strong>repos shelf</strong>: a polyrepo containing ~30 independent projects
-organized under <code>CodeProjects/Phenotype/organizational-shelf/repos</code>.</p>
-<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">What is a shelf?</h2><a id="user-content-what-is-a-shelf" class="anchor" aria-label="Permalink: What is a shelf?" href="#what-is-a-shelf"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<p dir="auto">A shelf is an organizational layer above individual projects. Think of it like
-<code>~/code/</code> or <code>/opt/</code> — a directory containing related but independent repositories.
-Each project is a standalone git repo; the shelf is their shared home.</p>
-<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Quick Start</h2><a id="user-content-quick-start" class="anchor" aria-label="Permalink: Quick Start" href="#quick-start"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Finding a project</h3><a id="user-content-finding-a-project" class="anchor" aria-label="Permalink: Finding a project" href="#finding-a-project"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="ls projects/INDEX.md   # Master project list with descriptions
-cat projects/INDEX.md   # Find your project"><pre>ls projects/INDEX.md   <span class="pl-c"><span class="pl-c">#</span> Master project list with descriptions</span>
-cat projects/INDEX.md   <span class="pl-c"><span class="pl-c">#</span> Find your project</span></pre></div>
-<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Working on a project</h3><a id="user-content-working-on-a-project" class="anchor" aria-label="Permalink: Working on a project" href="#working-on-a-project"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="cd &lt;project-name&gt;      # e.g., cd heliosCLI
-git status             # Verify you're in the right place"><pre><span class="pl-c1">cd</span> <span class="pl-k">&lt;</span>project-name<span class="pl-k">&gt;</span>      <span class="pl-c"><span class="pl-c">#</span> e.g., cd heliosCLI</span>
-git status             <span class="pl-c"><span class="pl-c">#</span> Verify you're in the right place</span></pre></div>
-<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Creating a worktree</h3><a id="user-content-creating-a-worktree" class="anchor" aria-label="Permalink: Creating a worktree" href="#creating-a-worktree"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="git worktree add .worktrees/my-feature -b my-feature
-cd .worktrees/my-feature"><pre>git worktree add .worktrees/my-feature -b my-feature
-<span class="pl-c1">cd</span> .worktrees/my-feature</pre></div>
-<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Project Categories</h2><a id="user-content-project-categories" class="anchor" aria-label="Permalink: Project Categories" href="#project-categories"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<p dir="auto">Projects are organized into functional categories at the top level:</p>
+<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><div class="markdown-heading" dir="auto"><h1 class="heading-element" dir="auto">Phenotype Polyrepo Shelf</h1><a id="user-content-phenotype-polyrepo-shelf" class="anchor" aria-label="Permalink: Phenotype Polyrepo Shelf" href="#phenotype-polyrepo-shelf"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<blockquote>
+<p dir="auto"><strong>Pinned references (Phenotype-org)</strong></p>
+<ul dir="auto">
+<li>MSRV: see <code>rust-toolchain.toml</code></li>
+<li>cargo-deny config: see <code>deny.toml</code></li>
+<li>cargo-audit: <code>rustsec/audit-check@v2</code> weekly</li>
+<li>Branch protection: 1 reviewer required, no force-push</li>
+<li>Branching baseline: canonical repo checkout should stay on <code>main</code> unless doing merge/pull</li>
+<li>Governance authority: <code>phenotype-org-governance/SUPERSEDED.md</code> when present in the relevant repo</li>
+</ul>
+</blockquote>
+<p dir="auto">This root is a <strong>polyrepo shelf</strong> for the Phenotype organization: one workspace directory containing many independent repositories, landing pages, shared libraries, and operational runbooks. It is intentionally a central index, not a replacement for each project's README.</p>
+<p dir="auto"><code>projects/INDEX.md</code> has been checked and is currently missing, so this README acts as the shelf index.</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">About this shelf</h2><a id="user-content-about-this-shelf" class="anchor" aria-label="Permalink: About this shelf" href="#about-this-shelf"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<ul dir="auto">
+<li><strong>Canonical repository layout:</strong> each first-level directory ending in a normal project name is the canonical checkout for that project.</li>
+<li><strong>Feature work:</strong> perform feature work in project worktrees under <code>*-wtrees/</code> and keep canonical directories aligned to <code>main</code>.</li>
+<li><strong>Cross-project standards:</strong> quality, spec, and governance expectations are documented in shelf-level docs and project-specific AGENTS/CLAUDE files.</li>
+<li><strong>Per-repo docs first:</strong> the README in each project folder is authoritative for setup, build, and workflow.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Getting Started</h2><a id="user-content-getting-started" class="anchor" aria-label="Permalink: Getting Started" href="#getting-started"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<ol dir="auto">
+<li>Pick a project directory from the table below.</li>
+<li>Open that project's own README (<code>&lt;project&gt;/README.md</code>).</li>
+<li>For any active implementation, use the project worktree under <code>&lt;project&gt;-wtrees/</code>.</li>
+<li>Track implementation work in this shelf's AgilePlus feature specs:
+<ul dir="auto">
+<li><a href="AgilePlus/kitty-specs/">AgilePlus specs</a> (spec index)</li>
+<li><a href="docs/worklogs/README.md">Shelf worklogs</a></li>
+</ul>
+</li>
+<li>Use shelf docs for cross-project context:
+<ul dir="auto">
+<li><code>docs/</code> for org policies, ADRs, and process references</li>
+<li><code>docs/worklogs/</code> for ADR-like decisions, research notes, and issue findings</li>
+</ul>
+</li>
+</ol>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Major repos and project index</h2><a id="user-content-major-repos-and-project-index" class="anchor" aria-label="Permalink: Major repos and project index" href="#major-repos-and-project-index"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto">This is a curated index of the most active/major repos in this checkout.</p>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">AgilePlus (shelf tracking)</h3><a id="user-content-agileplus-shelf-tracking" class="anchor" aria-label="Permalink: AgilePlus (shelf tracking)" href="#agileplus-shelf-tracking"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
 <markdown-accessiblity-table><table>
 <thead>
 <tr>
-<th>Category</th>
-<th>Contents</th>
+<th>Project</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>apps/</code></td>
-<td>User-facing applications</td>
-</tr>
-<tr>
-<td><code>tooling/</code></td>
-<td>Developer tools, CLIs, scripts</td>
-</tr>
-<tr>
-<td><code>infra/</code></td>
-<td>Infrastructure, deployment, devops</td>
-</tr>
-<tr>
-<td><code>libs/</code></td>
-<td>Shared libraries and packages</td>
-</tr>
-<tr>
-<td><code>platforms/</code></td>
-<td>Platform-as-product projects</td>
+<td><a href="AgilePlus/">AgilePlus</a></td>
+<td>Local-first spec-driven agile work-tracking CLI/platform for AI-agent and human teams; manages feature specs, work packages, acceptance criteria, optional GitHub sync, dashboards, and P2P merge. Install from <code>AgilePlus/</code> with <code>cargo install --path crates/agileplus-cli</code>; see <code>AgilePlus/README.md</code>.</td>
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<p dir="auto">Note: Not all projects are yet in these categories — the reorganization is ongoing.
-Use <code>projects/INDEX.md</code> for the authoritative list.</p>
-<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Key Files</h2><a id="user-content-key-files" class="anchor" aria-label="Permalink: Key Files" href="#key-files"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Agent orchestration and LLM execution</h3><a id="user-content-agent-orchestration-and-llm-execution" class="anchor" aria-label="Permalink: Agent orchestration and LLM execution" href="#agent-orchestration-and-llm-execution"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
 <markdown-accessiblity-table><table>
 <thead>
 <tr>
-<th>File</th>
+<th>Project</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="thegent/">thegent</a></td>
+<td>Agent runtime and decomposition framework for multi-actor execution.</td>
+</tr>
+<tr>
+<td><a href="thegent-dispatch/">thegent-dispatch</a></td>
+<td>Dispatch service for routing worker workloads across providers.</td>
+</tr>
+<tr>
+<td><a href="thegent-workspace/">thegent-workspace</a></td>
+<td>Workspace scaffolding and state model for thegent.</td>
+</tr>
+<tr>
+<td><a href="thegent-landing/">thegent-landing</a></td>
+<td>Marketing/landing site for thegent.</td>
+</tr>
+<tr>
+<td><a href="cheap-llm-mcp/">cheap-llm-mcp</a></td>
+<td>MCP server for routing low-cost model usage.</td>
+</tr>
+<tr>
+<td><a href="dispatch-mcp/">dispatch-mcp</a></td>
+<td>Single endpoint MCP dispatch utility.</td>
+</tr>
+<tr>
+<td><a href="agentapi-plusplus/">agentapi-plusplus</a></td>
+<td>API gateway and protocol adapters for agent workflows.</td>
+</tr>
+<tr>
+<td><a href="agent-user-status/">agent-user-status</a></td>
+<td>Presence/status service for user-facing agent interactions.</td>
+</tr>
+<tr>
+<td><a href="agent-devops-setups/">agent-devops-setups</a></td>
+<td>Provisioning and orchestration setup helpers.</td>
+</tr>
+<tr>
+<td><a href="agentops-policy-federation/">agentops-policy-federation</a></td>
+<td>Cross-agent policy federation.</td>
+</tr>
+<tr>
+<td><a href="Agentora/">Agentora</a></td>
+<td>Agent orchestration product.</td>
+</tr>
+<tr>
+<td><a href="PhenoAgent/">PhenoAgent</a></td>
+<td>Agent SDK for the Phenotype runtime.</td>
+</tr>
+<tr>
+<td><a href="phenoForge/">phenoForge</a></td>
+<td>Phenotype-flavored Forge integrations.</td>
+</tr>
+<tr>
+<td><a href="forgecode/">forgecode</a></td>
+<td>Forge agent integration scaffolding.</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">MCP, APIs, and routing infrastructure</h3><a id="user-content-mcp-apis-and-routing-infrastructure" class="anchor" aria-label="Permalink: MCP, APIs, and routing infrastructure" href="#mcp-apis-and-routing-infrastructure"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="agileplus-mcp/">agileplus-mcp</a></td>
+<td>MCP integration surface for AgilePlus.</td>
+</tr>
+<tr>
+<td><a href="AgentMCP/">AgentMCP</a></td>
+<td>Experimental MCP scaffolding repository.</td>
+</tr>
+<tr>
+<td><a href="McpKit/">McpKit</a></td>
+<td>MCP server scaffolding kit.</td>
+</tr>
+<tr>
+<td><a href="MCPForge/">MCPForge</a></td>
+<td>MCP server forge tooling.</td>
+</tr>
+<tr>
+<td><a href="cliproxyapi-plusplus/">cliproxyapi-plusplus</a></td>
+<td>Multi-provider CLI proxy and API compatibility surface.</td>
+</tr>
+<tr>
+<td><a href="helios-router/">helios-router</a></td>
+<td>Routing layer for LLM/agent requests.</td>
+</tr>
+<tr>
+<td><a href="helios-cli/">helios-cli</a></td>
+<td>CLI client for Helios workflows.</td>
+</tr>
+<tr>
+<td><a href="helioscope/">helioscope</a></td>
+<td>App manager (formerly heliosCLI).</td>
+</tr>
+<tr>
+<td><a href="PhenoMCP/">PhenoMCP</a></td>
+<td>MCP runtime and plugin scaffolding.</td>
+</tr>
+<tr>
+<td><a href="vibeproxy/">vibeproxy</a></td>
+<td>LLM/dev traffic proxy.</td>
+</tr>
+<tr>
+<td><a href="vibeproxy-monitoring-unified/">vibeproxy-monitoring-unified</a></td>
+<td>Unified monitoring stack for vibeproxy.</td>
+</tr>
+<tr>
+<td><a href="Httpora/">Httpora</a></td>
+<td>HTTP utilities/proxy.</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Core platform + shared crates</h3><a id="user-content-core-platform--shared-crates" class="anchor" aria-label="Permalink: Core platform + shared crates" href="#core-platform--shared-crates"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="pheno/">pheno</a></td>
+<td>Core Phenotype platform workspace (multiple subproducts).</td>
+</tr>
+<tr>
+<td><a href="phenoShared/">phenoShared</a></td>
+<td>Shared cross-repo Rust crates and helpers.</td>
+</tr>
+<tr>
+<td><a href="PhenoRuntime/">PhenoRuntime</a></td>
+<td>Runtime abstractions used across Phenotype components.</td>
+</tr>
+<tr>
+<td><a href="PhenoControl/">PhenoControl</a></td>
+<td>Control-plane primitives and policy wiring.</td>
+</tr>
+<tr>
+<td><a href="PhenoSchema/">PhenoSchema</a></td>
+<td>Shared schema and contract types.</td>
+</tr>
+<tr>
+<td><a href="PhenoPlugins/">PhenoPlugins</a></td>
+<td>Plugin framework and extension points.</td>
+</tr>
+<tr>
+<td><a href="PhenoKits/">PhenoKits</a></td>
+<td>Kit-level tool and artifact collection (umbrella).</td>
+</tr>
+<tr>
+<td><a href="PhenoEvents/">PhenoEvents</a></td>
+<td>Event bus and signal model.</td>
+</tr>
+<tr>
+<td><a href="PhenoLang/">PhenoLang</a></td>
+<td>Language/tooling support.</td>
+</tr>
+<tr>
+<td><a href="PhenoCompose/">PhenoCompose</a></td>
+<td>Composition and orchestration helpers.</td>
+</tr>
+<tr>
+<td><a href="phenotype-shared/">phenotype-shared</a></td>
+<td>Historical alias path for shared crates (same repo as phenoShared).</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Product applications</h3><a id="user-content-product-applications" class="anchor" aria-label="Permalink: Product applications" href="#product-applications"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="heliosApp/">heliosApp</a></td>
+<td>Product application workspace for helios.</td>
+</tr>
+<tr>
+<td><a href="HeliosLab/">HeliosLab</a></td>
+<td>Experimentation and analytics workspace for helios.</td>
+</tr>
+<tr>
+<td><a href="heliosBench/">heliosBench</a></td>
+<td>Benchmarking project for helios execution performance.</td>
+</tr>
+<tr>
+<td><a href="BytePort/">BytePort</a></td>
+<td>Network transport and endpoint-oriented product.</td>
+</tr>
+<tr>
+<td><a href="Tokn/">Tokn</a></td>
+<td>Token operations and pricing governance.</td>
+</tr>
+<tr>
+<td><a href="Tracera/">Tracera</a></td>
+<td>Traceability system for event and execution history.</td>
+</tr>
+<tr>
+<td><a href="Observably/">Observably</a></td>
+<td>Product-level observability surface.</td>
+</tr>
+<tr>
+<td><a href="hwLedger/">hwLedger</a></td>
+<td>Hardware and capacity ledger for fleet/operations planning.</td>
+</tr>
+<tr>
+<td><a href="PolicyStack/">PolicyStack</a></td>
+<td>Governance/policy engine and compliance tooling.</td>
+</tr>
+<tr>
+<td><a href="Planify/">Planify</a></td>
+<td>Planning utilities and work lifecycle helpers.</td>
+</tr>
+<tr>
+<td><a href="Sidekick/">Sidekick</a></td>
+<td>Assistant-side operational helper.</td>
+</tr>
+<tr>
+<td><a href="Eidolon/">Eidolon</a></td>
+<td>Phenotype's Eidolon domain project.</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Tooling and infrastructure</h3><a id="user-content-tooling-and-infrastructure" class="anchor" aria-label="Permalink: Tooling and infrastructure" href="#tooling-and-infrastructure"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="FocalPoint/">FocalPoint</a></td>
+<td>Central operations tooling, including target-pruner utilities.</td>
+</tr>
+<tr>
+<td><a href="Configra/">Configra</a></td>
+<td>Configuration management framework.</td>
+</tr>
+<tr>
+<td><a href="Conft/">Conft</a></td>
+<td>Flag/config control service.</td>
+</tr>
+<tr>
+<td><a href="PhenoObservability/">PhenoObservability</a></td>
+<td>Logging, tracing, telemetry, and monitoring stack.</td>
+</tr>
+<tr>
+<td><a href="ObservabilityKit/">ObservabilityKit</a></td>
+<td>Reusable observability building blocks.</td>
+</tr>
+<tr>
+<td><a href="PlatformKit/">PlatformKit</a></td>
+<td>Cross-platform platform utilities.</td>
+</tr>
+<tr>
+<td><a href="HexaKit/">HexaKit</a></td>
+<td>Architecture and scaffolding utilities.</td>
+</tr>
+<tr>
+<td><a href="phenotype-infra/">phenotype-infra</a></td>
+<td>Infrastructure-as-code and org automation.</td>
+</tr>
+<tr>
+<td><a href="phenoAI/">phenoAI</a></td>
+<td>AI service integrations and helpers.</td>
+</tr>
+<tr>
+<td><a href="ValidationKit/">ValidationKit</a></td>
+<td>Validation and policy checks.</td>
+</tr>
+<tr>
+<td><a href="TestingKit/">TestingKit</a></td>
+<td>Test scaffolding and quality helpers.</td>
+</tr>
+<tr>
+<td><a href="rich-cli-kit/">rich-cli-kit</a></td>
+<td>Rich terminal UX helpers.</td>
+</tr>
+<tr>
+<td><a href="ResilienceKit/">ResilienceKit</a></td>
+<td>Resilience patterns library.</td>
+</tr>
+<tr>
+<td><a href="Tracely/">Tracely</a></td>
+<td>Trace explorer.</td>
+</tr>
+<tr>
+<td><a href="Metron/">Metron</a></td>
+<td>Metric collection service.</td>
+</tr>
+<tr>
+<td><a href="Tasken/">Tasken</a></td>
+<td>Task scheduler.</td>
+</tr>
+<tr>
+<td><a href="Civis/">Civis</a></td>
+<td>Civis project.</td>
+</tr>
+<tr>
+<td><a href="Benchora/">Benchora</a></td>
+<td>Benchmarking service.</td>
+</tr>
+<tr>
+<td><a href="QuadSGM/">QuadSGM</a></td>
+<td>QuadSGM project.</td>
+</tr>
+<tr>
+<td><a href="localbase3/">localbase3</a></td>
+<td>Local DB / storage layer.</td>
+</tr>
+<tr>
+<td><a href="KDesktopVirt/">KDesktopVirt</a></td>
+<td>Desktop virtualization.</td>
+</tr>
+<tr>
+<td><a href="bare-cua/">bare-cua</a></td>
+<td>Bare computer-use-agent harness.</td>
+</tr>
+<tr>
+<td><a href="PlayCua/">PlayCua</a></td>
+<td>Computer-use agent playground.</td>
+</tr>
+<tr>
+<td><a href="AppGen/">AppGen</a></td>
+<td>App generator.</td>
+</tr>
+<tr>
+<td><a href="DevHex/">DevHex</a></td>
+<td>DevHex product.</td>
+</tr>
+<tr>
+<td><a href="Dino/">Dino</a></td>
+<td>Dinoforge core.</td>
+</tr>
+<tr>
+<td><a href="dinoforge-packs/">dinoforge-packs</a></td>
+<td>Dinoforge governance packs.</td>
+</tr>
+<tr>
+<td><a href="DINOForge-UnityDoorstop/">DINOForge-UnityDoorstop</a></td>
+<td>Unity Doorstop integration.</td>
+</tr>
+<tr>
+<td><a href="KlipDot/">KlipDot</a></td>
+<td>KlipDot product.</td>
+</tr>
+<tr>
+<td><a href="Pine/">Pine</a></td>
+<td>Pine project.</td>
+</tr>
+<tr>
+<td><a href="Parpoura/">Parpoura</a></td>
+<td>Parpoura project.</td>
+</tr>
+<tr>
+<td><a href="Paginary/">Paginary</a></td>
+<td>Pagination service.</td>
+</tr>
+<tr>
+<td><a href="netweave-final2/">netweave-final2</a></td>
+<td>Netweave experiment.</td>
+</tr>
+<tr>
+<td><a href="foqos-private/">foqos-private</a></td>
+<td>Foqos (private).</td>
+</tr>
+<tr>
+<td><a href="argis-extensions/">argis-extensions</a></td>
+<td>Argis editor extensions.</td>
+</tr>
+<tr>
+<td><a href="AtomsBot/">AtomsBot</a></td>
+<td>Atoms bot (archived; retained for history).</td>
+</tr>
+<tr>
+<td><a href="chatta/">chatta</a></td>
+<td>Chatta workspace.</td>
+</tr>
+<tr>
+<td><a href="portage/">portage</a></td>
+<td>Portage workspace.</td>
+</tr>
+<tr>
+<td><a href="portage-adapter-core/">portage-adapter-core</a></td>
+<td>Portage adapter core.</td>
+</tr>
+<tr>
+<td><a href="nanovms/">nanovms</a></td>
+<td>NanoVM integration.</td>
+</tr>
+<tr>
+<td><a href="GDK/">GDK</a></td>
+<td>Game/graphics dev kit.</td>
+</tr>
+<tr>
+<td><a href="DataKit/">DataKit</a></td>
+<td>Data-pipeline kit.</td>
+</tr>
+<tr>
+<td><a href="AuthKit/">AuthKit</a></td>
+<td>Auth kit.</td>
+</tr>
+<tr>
+<td><a href="kwality/">kwality</a></td>
+<td>Quality / scorecard tooling.</td>
+</tr>
+<tr>
+<td><a href="phenoUtils/">phenoUtils</a></td>
+<td>Shared utilities.</td>
+</tr>
+<tr>
+<td><a href="phenoDesign/">phenoDesign</a></td>
+<td>Design system primitives.</td>
+</tr>
+<tr>
+<td><a href="phenodocs/">phenodocs</a></td>
+<td>Phenotype documentation site.</td>
+</tr>
+<tr>
+<td><a href="phenodocs-scorecard-remediation/">phenodocs-scorecard-remediation</a></td>
+<td>Doc scorecard remediation harness.</td>
+</tr>
+<tr>
+<td><a href="PhenoHandbook/">PhenoHandbook</a></td>
+<td>Phenotype handbook.</td>
+</tr>
+<tr>
+<td><a href="phenotype-auth-ts/">phenotype-auth-ts</a></td>
+<td>TypeScript auth client.</td>
+</tr>
+<tr>
+<td><a href="phenotype-bus/">phenotype-bus</a></td>
+<td>Message bus.</td>
+</tr>
+<tr>
+<td><a href="phenotype-hub/">phenotype-hub</a></td>
+<td>Discovery / registry hub.</td>
+</tr>
+<tr>
+<td><a href="phenotype-registry/">phenotype-registry</a></td>
+<td>Artifact registry.</td>
+</tr>
+<tr>
+<td><a href="phenotype-journeys/">phenotype-journeys</a></td>
+<td>User-journey traceability.</td>
+</tr>
+<tr>
+<td><a href="phenotype-omlx/">phenotype-omlx</a></td>
+<td>OMLX integration.</td>
+</tr>
+<tr>
+<td><a href="phenotype-ops-mcp/">phenotype-ops-mcp</a></td>
+<td>Ops MCP surface.</td>
+</tr>
+<tr>
+<td><a href="phenotype-org-audits/">phenotype-org-audits</a></td>
+<td>Org-wide audit reports.</td>
+</tr>
+<tr>
+<td><a href="phenotype-tooling/">phenotype-tooling</a></td>
+<td>Cross-repo tool chest.</td>
+</tr>
+<tr>
+<td><a href="phenotype-icons/">phenotype-icons</a></td>
+<td>Icon set.</td>
+</tr>
+<tr>
+<td><a href="phenotype-previews-smoketest/">phenotype-previews-smoketest</a></td>
+<td>Preview/smoketest harness.</td>
+</tr>
+<tr>
+<td><a href="phenotype-skills/">phenotype-skills</a></td>
+<td>Claude skill definitions.</td>
+</tr>
+<tr>
+<td><a href="phenoXdd/">phenoXdd</a></td>
+<td>XDD (cross-document development) tooling.</td>
+</tr>
+<tr>
+<td><a href="phenoResearchEngine/">phenoResearchEngine</a></td>
+<td>Research automation engine.</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Landing pages and web surfaces</h3><a id="user-content-landing-pages-and-web-surfaces" class="anchor" aria-label="Permalink: Landing pages and web surfaces" href="#landing-pages-and-web-surfaces"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="agileplus-landing/">agileplus-landing</a></td>
+<td>Marketing/landing site for AgilePlus.</td>
+</tr>
+<tr>
+<td><a href="byteport-landing/">byteport-landing</a></td>
+<td>Marketing/landing site for BytePort.</td>
+</tr>
+<tr>
+<td><a href="hwledger-landing/">hwledger-landing</a></td>
+<td>Marketing/landing site for hwLedger.</td>
+</tr>
+<tr>
+<td><a href="phenokits-landing/">phenokits-landing</a></td>
+<td>Marketing/landing site for PhenoKits.</td>
+</tr>
+<tr>
+<td><a href="projects-landing/">projects-landing</a></td>
+<td>Organization-wide projects landing page.</td>
+</tr>
+<tr>
+<td><a href="frontend/">frontend</a></td>
+<td>Shelf-level frontend app surface.</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<div class="markdown-heading" dir="auto"><h3 class="heading-element" dir="auto">Cross-cutting shelves and references</h3><a id="user-content-cross-cutting-shelves-and-references" class="anchor" aria-label="Permalink: Cross-cutting shelves and references" href="#cross-cutting-shelves-and-references"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<markdown-accessiblity-table><table>
+<thead>
+<tr>
+<th>Path</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>projects/INDEX.md</code></td>
-<td>Master project catalog</td>
+<td><code>docs/worklogs/</code></td>
+<td>Shelf-wide worklog index by category (<code>ARCHITECTURE</code>, <code>RESEARCH</code>, <code>GOVERNANCE</code>, etc.).</td>
 </tr>
 <tr>
-<td><code>AGENTS.md</code></td>
-<td>Agent interaction rules</td>
+<td><code>AgilePlus/kitty-specs/</code></td>
+<td>Feature specs and task packages used by AgilePlus.</td>
 </tr>
 <tr>
-<td><code>GOVERNANCE.md</code></td>
-<td>Shelf governance</td>
+<td><code>docs/</code></td>
+<td>Shared references, ADRs, and reusable docs.</td>
 </tr>
 <tr>
-<td><code>CLAUDE.md</code></td>
-<td>Claude Code settings</td>
+<td><code>*-wtrees/</code></td>
+<td>Project worktree directories (e.g. <code>AgilePlus-wtrees/</code>).</td>
 </tr>
 <tr>
-<td><code>WORKSTORES.md</code></td>
-<td>Worktree management guide</td>
+<td><code>.github/scripts/</code></td>
+<td>Shared CI and maintenance scripts.</td>
 </tr>
 <tr>
-<td><code>REPOS_INDEX.md</code></td>
-<td>Detailed shelf index</td>
+<td><code>AgilePlus/</code></td>
+<td>Main platform implementation.</td>
 </tr>
 </tbody>
 </table></markdown-accessiblity-table>
-<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Architecture</h2><a id="user-content-architecture" class="anchor" aria-label="Permalink: Architecture" href="#architecture"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<div class="snippet-clipboard-content notranslate position-relative overflow-auto" data-snippet-clipboard-copy-content="repos/                          # ← Shelf root (YOU ARE HERE)
-├── .worktrees/                 # Worktree staging area
-├── .archive/                    # Archived projects
-├── .claude/                     # Shelf-level Claude settings
-├── .cursor/                     # Shelf-level Cursor settings
-├── projects/                    # Project metadata &amp; catalog
-├── docs/                        # Cross-project documentation
-│   ├── adr/                   # Architecture Decision Records
-│   └── guides/                # How-to guides
-├── scripts/                     # Cross-project scripts
-├── governance/                  # Governance tooling
-├── plans/                       # Work plans
-└── [projects]                   # ~30 independent git repos"><pre class="notranslate"><code>repos/                          # ← Shelf root (YOU ARE HERE)
-├── .worktrees/                 # Worktree staging area
-├── .archive/                    # Archived projects
-├── .claude/                     # Shelf-level Claude settings
-├── .cursor/                     # Shelf-level Cursor settings
-├── projects/                    # Project metadata &amp; catalog
-├── docs/                        # Cross-project documentation
-│   ├── adr/                   # Architecture Decision Records
-│   └── guides/                # How-to guides
-├── scripts/                     # Cross-project scripts
-├── governance/                  # Governance tooling
-├── plans/                       # Work plans
-└── [projects]                   # ~30 independent git repos
-</code></pre></div>
-<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Agent Workflow</h2><a id="user-content-agent-workflow" class="anchor" aria-label="Permalink: Agent Workflow" href="#agent-workflow"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<ol dir="auto">
-<li><strong>Identify the project</strong> — Check <code>projects/INDEX.md</code> or ask the user</li>
-<li><strong>Navigate to project</strong> — <code>cd &lt;project-name&gt;</code></li>
-<li><strong>Read project rules</strong> — Check for <code>CLAUDE.md</code> or <code>AGENTS.md</code> in project</li>
-<li><strong>Do the work</strong> — Follow shelf rules in <code>AGENTS.md</code></li>
-<li><strong>Commit &amp; push</strong> — Use conventional commits, open PR if needed</li>
-</ol>
-<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">NOT AgilePlus</h2><a id="user-content-not-agileplus" class="anchor" aria-label="Permalink: NOT AgilePlus" href="#not-agileplus"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<p dir="auto">This shelf contains <strong>many projects</strong>, of which AgilePlus is one.
-AgilePlus-specific documentation lives inside the <code>AgilePlus/</code> project directory,
-not at shelf level.</p>
-<p dir="auto">The files that were previously here describing AgilePlus have been moved to
-their correct locations:</p>
+<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Notes</h2><a id="user-content-notes" class="anchor" aria-label="Permalink: Notes" href="#notes"><svg data-component="Octicon" class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
 <ul dir="auto">
-<li>AgilePlus governance → <code>AgilePlus/GOVERNANCE.md</code></li>
-<li>AgilePlus agent rules → <code>AgilePlus/AGENTS.md</code></li>
-<li>AgilePlus README → <code>AgilePlus/README.md</code></li>
-</ul>
-<div class="markdown-heading" dir="auto"><h2 class="heading-element" dir="auto">Getting Help</h2><a id="user-content-getting-help" class="anchor" aria-label="Permalink: Getting Help" href="#getting-help"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
-<ul dir="auto">
-<li>Shelf-level issues: Ask here</li>
-<li>Project-specific issues: <code>cd &lt;project&gt;</code> and check that project's docs</li>
-<li>Architecture decisions: <code>cat docs/adr/INDEX.md</code></li>
-<li>General questions: Check <code>projects/INDEX.md</code> first</li>
+<li>Some directories are placeholders/landing/utility trees and may not represent standalone canonical products.</li>
+<li>This README is intentionally a shelf-level index; source-of-truth setup for each project stays in that project's own <code>README.md</code>.</li>
+<li>This index does not remove information from previous versions; it reorganizes it for polyrepo orientation and easier navigation.</li>
 </ul>
 </article></div>
